@@ -1,111 +1,61 @@
-# 🌐 FamilyBrowser — Android Browser App
+# Android-Template-Kotlin
+A modern Android application template built on MVVM Architecture, featuring Coroutines, Retrofit, Room, Hilt, and more. This template is
+designed to save time by setting up a well-structured project with the latest best practices in just a few seconds.
 
-Fast, Safe & Family-Friendly browser built with **Kotlin + Jetpack Compose**.  
-Play Store ready. No external extensions needed — everything is built in.
+# How to use
+**1. Clone the Repository**
+   
+   Just clone it and change the project information to get the most common best practice design.
+   ```kotlin
+   git clone https://github.com/tanimul/A ndroid-Template-Kotlin
+   ```
+   
+   Or simply [![Use this template](https://img.shields.io/badge/-Use%20this%20template-brightgreen)](https://github.com/Tanimul/Android-Template-Kotlin/generate) use the button below to create a new repository from this template.
 
----
+**2. Update Project Information**
+   - Change **App ID** in `build.gradle.kts`
+   - Update **AndroidManifest.xml** (app name, permissions, etc.)
+   - Modify **strings.xml** for custom app details
 
-## 📁 Project Structure
+**3. Build & Run**
+     
+   Open the project in **Android Studio**, sync dependencies, and run the app!
 
-```
-FamilyBrowser/
-├── app/
-│   ├── src/main/
-│   │   ├── java/com/familybrowser/
-│   │   │   ├── MainActivity.kt          ← UI (Jetpack Compose)
-│   │   │   ├── BrowserViewModel.kt      ← Central state management
-│   │   │   ├── AdBlocker.kt             ← Ad/tracker/adult content blocking
-│   │   │   ├── TabManager.kt            ← Multi-tab system
-│   │   │   ├── UserProfileManager.kt    ← Multi-profile + Kids/Guest modes
-│   │   │   ├── DownloadManager.kt       ← Built-in download manager
-│   │   │   ├── BrowserApplication.kt   ← App class
-│   │   │   └── service/
-│   │   │       └── BackgroundAudioService.kt  ← YouTube background play
-│   │   ├── res/
-│   │   │   ├── values/
-│   │   │   │   ├── strings.xml          ← All strings (localizable)
-│   │   │   │   ├── colors.xml
-│   │   │   │   └── themes.xml
-│   │   │   ├── xml/
-│   │   │   │   ├── network_security_config.xml
-│   │   │   │   ├── file_paths.xml
-│   │   │   │   ├── backup_rules.xml
-│   │   │   │   └── data_extraction_rules.xml
-│   │   │   └── drawable/
-│   │   │       └── ic_splash.xml
-│   │   └── AndroidManifest.xml
-│   ├── build.gradle.kts                 ← App-level Gradle
-│   └── proguard-rules.pro
-├── build.gradle.kts                     ← Project-level Gradle
-├── settings.gradle.kts
-├── gradle.properties
-└── gradle/wrapper/
-    └── gradle-wrapper.properties
-```
+# Why Use This Template?
+- Pre-configured MVVM Architecture with Repository Pattern
+- Latest Android development tools & libraries
+- Reduces boilerplate code for faster project setup
+- Clean and scalable project structure
 
----
+# Features
+- 100% Kotlin – Modern & concise coding
+- Base Activity & Fragment – For consistent architecture
+- MVVM + Repository Pattern – Clean separation of concerns
+- Local & Remote Data Source – RoomDB + Retrofit integration
+- State Management – LiveData & Flow
+- Efficient Image Loading – Glide integration
+- DiffUtil for RecyclerView – Optimized UI updates
+- Dependency Injection – Dagger Hilt setup
+- Pagination Support – Implemented using Paging 3
+- SharedPreferences & DataStore – Persistent storage solutions
+- Timber Logging – For better debugging
 
-## 🚀 Build & Run
+# Libraries & Tools Used
+- Coroutines – Asynchronous programming
+- Dagger Hilt – Dependency Injection
+- ViewModel – Lifecycle-aware UI logic
+- Flow – Reactive data handling
+- Data Binding – Bind UI elements efficiently
+- Retrofit – Network calls made simple
+- RoomDB – Local database with ease
+- Glide – Image loading library
+- DiffUtil – Optimized RecyclerView updates
+- SharedPreferences & DataStore – Data persistence
+- Paging 3 – Efficient pagination
+- Timber – Advanced logging
 
-### Requirements
-- Android Studio Hedgehog (2023.1.1) or newer
-- JDK 17
-- Android SDK 34
+## If this tamplate helps you in anyway, show your love :heart: by putting a :star: on this project :v:
 
-### Steps
-1. Open **Android Studio** → `File > Open` → select `FamilyBrowser/`
-2. Let Gradle sync complete
-3. Add a launcher icon:
-   - Right-click `res/` → `New > Image Asset` → set up `ic_launcher`
-4. Run on device or emulator (API 26+)
-
----
-
-## 🔑 Key Features
-
-| Feature | Status |
-|---|---|
-| Ad Blocker (17+ networks) | ✅ Built-in |
-| Tracker Blocker (30+ domains) | ✅ Built-in |
-| Adult Content Filter + PIN | ✅ Built-in |
-| Multi-Tab (Chrome style) | ✅ Built-in |
-| Multi-Profile (up to 5) | ✅ Built-in |
-| Kids Mode (whitelist only) | ✅ Built-in |
-| Guest Mode (no history) | ✅ Built-in |
-| YouTube Background Play | ✅ Built-in |
-| Download Manager | ✅ Built-in |
-| Dark Mode injection | ✅ Built-in |
-| Reader Mode | ✅ Built-in |
-| Find in Page | ✅ Built-in |
-| Desktop Mode | ✅ Built-in |
-| Incognito Tabs | ✅ Built-in |
-| DNS over HTTPS ready | ✅ Cloudflare 1.1.1.1 |
-| Hardware Acceleration | ✅ Enabled |
-| ProGuard / R8 | ✅ Configured |
-
----
-
-## 📦 Play Store Checklist
-
-- [ ] Add `ic_launcher` and `ic_launcher_round` icons (512×512 for store listing)
-- [ ] Create a release keystore and configure `signingConfigs` in `build.gradle.kts`
-- [ ] Set `versionCode` / `versionName` for each release
-- [ ] Add your Privacy Policy URL to Play Console
-- [ ] Fill out content rating questionnaire (browser = generic rating)
-- [ ] Test on API 26 (min) and API 34 (target)
-
----
-
-## 🔒 Security Notes
-
-- All ad/adult blocking is done **locally** — no data sent to any server
-- Passwords stored in `EncryptedSharedPreferences` (AES-256-GCM)
-- `android:usesCleartextTraffic="false"` — HTTPS enforced
-- Profile PINs are stored encrypted
-- Guest mode auto-clears all data on exit
-
----
-
-## 📜 License
-
-MIT License — free for personal and commercial use.
+### Contributing to Android-Template-Kotlin
+All pull requests are welcome, make sure to follow the [contribution guidelines](CONTRIBUTING.md)
+when you submit pull request.

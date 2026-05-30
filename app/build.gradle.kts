@@ -1,20 +1,21 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.google.dagger.hilt.android)
+    alias(libs.plugins.google.devtools.ksp)
 }
 
 android {
     namespace = "com.familybrowser"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.familybrowser"
-        minSdk = 26          // Android 8.0 Oreo
-        targetSdk = 34       // Android 14
+        minSdk = 26
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }
@@ -27,13 +28,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // Sign with your keystore for Play Store:
-            // signingConfig = signingConfigs.getByName("release")
         }
         debug {
             isDebuggable = true
             applicationIdSuffix = ".debug"
-            versionNameSuffix = "-debug"
         }
     }
 
@@ -54,10 +52,11 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        viewBinding = true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 
     packaging {
@@ -68,24 +67,16 @@ android {
 }
 
 dependencies {
-    // ── Kotlin ────────────────────────────────────────────────────────────────
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    // ── Core ──────────────────────────────────────────────────
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
 
-    // ── AndroidX Core ─────────────────────────────────────────────────────────
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation("androidx.startup:startup-runtime:1.1.1")
-
-    // ── Jetpack Compose BOM ───────────────────────────────────────────────────
-    val composeBom = platform("androidx.compose:compose-bom:2024.02.00")
+    // ── Compose BOM ───────────────────────────────────────────
+    val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
     implementation(composeBom)
-    androidTestImplementation(composeBom)
-
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -93,53 +84,73 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.compose.animation:animation")
     implementation("androidx.compose.foundation:foundation")
-    implementation("androidx.compose.runtime:runtime-livedata")
+    implementation("androidx.activity:activity-compose:1.9.0")
 
-    // ── WebView ───────────────────────────────────────────────────────────────
-    implementation("androidx.webkit:webkit:1.10.0")
+    // ── Lifecycle / ViewModel ─────────────────────────────────
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.common.java8)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
 
-    // ── Security (Encrypted SharedPreferences) ────────────────────────────────
+    // ── Navigation ────────────────────────────────────────────
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation("androidx.navigation:navigation-compose:2.8.0")
+
+    // ── Hilt DI ───────────────────────────────────────────────
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.hilt.navigation.fragment)
+
+    // ── Coroutines ────────────────────────────────────────────
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+
+    // ── WebView ───────────────────────────────────────────────
+    implementation("androidx.webkit:webkit:1.11.0")
+
+    // ── Security ──────────────────────────────────────────────
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
-
-    // ── Biometric ─────────────────────────────────────────────────────────────
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
 
-    // ── Navigation ────────────────────────────────────────────────────────────
-    implementation("androidx.navigation:navigation-compose:2.7.6")
+    // ── Room ──────────────────────────────────────────────────
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
-    // ── Splashscreen ──────────────────────────────────────────────────────────
+    // ── DataStore ─────────────────────────────────────────────
+    implementation(libs.androidx.datastore.preferences)
+
+    // ── Network ───────────────────────────────────────────────
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.gson)
+
+    // ── Image Loading ─────────────────────────────────────────
+    implementation(libs.glide.library)
+    kapt(libs.glide.compiler)
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // ── Splash Screen ─────────────────────────────────────────
     implementation("androidx.core:core-splashscreen:1.0.1")
 
-    // ── DataStore (alternate to SharedPreferences) ────────────────────────────
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    // ── Accompanist ───────────────────────────────────────────
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.34.0")
+    implementation("com.google.accompanist:accompanist-permissions:0.34.0")
 
-    // ── Work Manager (scheduled cleanup) ─────────────────────────────────────
-    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    // ── Fragment ──────────────────────────────────────────────
+    implementation(libs.androidx.fragment.ktx)
 
-    // ── Camera (QR scanner) ───────────────────────────────────────────────────
-    implementation("androidx.camera:camera-camera2:1.3.1")
-    implementation("androidx.camera:camera-lifecycle:1.3.1")
-    implementation("androidx.camera:camera-view:1.3.1")
-    implementation("com.google.mlkit:barcode-scanning:17.2.0")
+    // ── UI Extras ─────────────────────────────────────────────
+    implementation(libs.lottie)
+    implementation(libs.shimmer)
+    implementation(libs.timber)
 
-    // ── Accompanist ───────────────────────────────────────────────────────────
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
-    implementation("com.google.accompanist:accompanist-permissions:0.32.0")
-    implementation("com.google.accompanist:accompanist-webview:0.33.2-alpha")
-
-    // ── Coil (image loading for favicons/thumbnails) ───────────────────────────
-    implementation("io.coil-kt:coil-compose:2.5.0")
-
-    // ── Room (password manager local DB) ─────────────────────────────────────
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
-
-    // ── Testing ───────────────────────────────────────────────────────────────
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    // ── Testing ───────────────────────────────────────────────
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
