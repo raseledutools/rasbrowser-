@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="adblocker_prefs.xml" />
+        <exclude domain="sharedpref" path="user_profiles.xml" />
+        <exclude domain="sharedpref" path="history.xml" />
+        <exclude domain="database" path="." />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="sharedpref" path="bookmarks.xml" />
+        <exclude domain="sharedpref" path="history.xml" />
+    </device-transfer>
+</data-extraction-rules>

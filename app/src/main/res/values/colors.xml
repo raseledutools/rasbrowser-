@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_blue">#2563EB</color>
+    <color name="brand_blue_dark">#1D4ED8</color>
+    <color name="background">#F2F2F7</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="splash_bg">#2563EB</color>
+    <color name="secure_green">#22C55E</color>
+    <color name="insecure_red">#EF4444</color>
+    <color name="kids_purple">#805AD5</color>
+</resources>

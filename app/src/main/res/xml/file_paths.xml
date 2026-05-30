@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- External downloads directory -->
+    <external-path
+        name="external_downloads"
+        path="Download/" />
+
+    <!-- External pictures -->
+    <external-path
+        name="external_pictures"
+        path="Pictures/" />
+
+    <!-- External movies -->
+    <external-path
+        name="external_movies"
+        path="Movies/" />
+
+    <!-- App-specific external files -->
+    <external-files-path
+        name="external_files"
+        path="." />
+
+    <!-- App internal cache (for screenshots) -->
+    <cache-path
+        name="cache"
+        path="." />
+
+    <!-- App internal files -->
+    <files-path
+        name="files"
+        path="." />
+</paths>
