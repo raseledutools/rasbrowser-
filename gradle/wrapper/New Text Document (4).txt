@@ -1,8 +1,0 @@
-amar apps e prolem ,ami button  phone mode koreci 
-
-but button phone mode e niyom holo ekta lanhcer page asbe ,oikhan theke seeson chola kale ar onno kothao jaoya jabe na,oi page thekei allow apps e jaoya jabe
-
-ei logic amar code e vul ,karon apps lanch hoy na
-ei file stay focus er etar modde logic ace jadex e ki likhe search korle apps blok ar allow lisst
-lanch korar opton or logic  pabo
-n.b oi apps e eta take a break name ace
